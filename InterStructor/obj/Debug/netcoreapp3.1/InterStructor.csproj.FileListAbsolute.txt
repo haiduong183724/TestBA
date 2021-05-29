@@ -1,0 +1,12 @@
+D:\GIT\VueJS\AmistServer\InterStructor\bin\Debug\netcoreapp3.1\CustomerCors.dll
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.csprojAssemblyReference.cache
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.AssemblyInfoInputs.cache
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.AssemblyInfo.cs
+D:\GIT\VueJS\AmistServer\InterStructor\bin\Debug\netcoreapp3.1\InterStructor.deps.json
+D:\GIT\VueJS\AmistServer\InterStructor\bin\Debug\netcoreapp3.1\InterStructor.dll
+D:\GIT\VueJS\AmistServer\InterStructor\bin\Debug\netcoreapp3.1\InterStructor.pdb
+D:\GIT\VueJS\AmistServer\InterStructor\bin\Debug\netcoreapp3.1\CustomerCors.pdb
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.csproj.CoreCompileInputs.cache
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.csproj.CopyComplete
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.dll
+D:\GIT\VueJS\AmistServer\InterStructor\obj\Debug\netcoreapp3.1\InterStructor.pdb

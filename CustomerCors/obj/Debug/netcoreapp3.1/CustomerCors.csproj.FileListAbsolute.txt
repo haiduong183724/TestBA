@@ -1,0 +1,9 @@
+D:\GIT\VueJS\AmistServer\CustomerCors\bin\Debug\netcoreapp3.1\CustomerCors.deps.json
+D:\GIT\VueJS\AmistServer\CustomerCors\bin\Debug\netcoreapp3.1\CustomerCors.dll
+D:\GIT\VueJS\AmistServer\CustomerCors\bin\Debug\netcoreapp3.1\CustomerCors.pdb
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.csprojAssemblyReference.cache
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.AssemblyInfoInputs.cache
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.AssemblyInfo.cs
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.csproj.CoreCompileInputs.cache
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.dll
+D:\GIT\VueJS\AmistServer\CustomerCors\obj\Debug\netcoreapp3.1\CustomerCors.pdb
