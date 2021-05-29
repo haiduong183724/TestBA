@@ -36,7 +36,7 @@ namespace AmistServer
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AmistServer", Version = "v1" });
             });
             services.AddScoped<ICustomerFilterData, CustomerFilterService>();
-            services.AddScoped<ICustomerExcute, CustomerExcuteService>();
+            services.AddScoped<ICustomerExcute, EmployeeRepo>();
             services.AddScoped(typeof(IBaseRepo<>),typeof(MISABaseRepo<>));
             services.AddScoped(typeof(IBaseService<>), typeof(MISABaseService<>));
         }
