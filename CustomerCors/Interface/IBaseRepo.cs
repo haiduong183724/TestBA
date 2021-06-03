@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerCors.ErrorMsg;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -9,36 +10,41 @@ namespace CustomerCors.Interface
         /// <summary>
         /// Hàm lấy tất cả danh sách
         /// </summary>
-        /// <returns>hàm trả về một mảng các thực thể lấy từ bảng</returns>
-        public List<MISAEntity> GetAll();
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả danh sách các nhân viên </returns>
+        public ServiceResult GetAll();
         /// <summary>
         /// Hàm lấy các thực thể dựa trên ID
         /// </summary>
         /// <param name="entityId">hàm truyền vào Id của đối tượng</param>
-        /// <returns>trả về một đối tượng phù hợp</returns>
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả + nhân viên phù hợp </returns>
         /// CreateBy:NHDUONG 29/5
-        public MISAEntity GetbyId(Guid entityId);
+        public ServiceResult GetbyId(Guid entityId);
         /// <summary>
         /// Hàm xóa 1 bản ghi 
         /// </summary>
         /// <param name="Id">Truyền vào ID của bản ghi</param>
-        /// <returns>Số bản ghi bị xóa</returns>
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả + số bản ghi bị xóa</returns>
         /// /// CreateBy:NHDUONG 29/5
-        public int? Delete(Guid Id);
+        public ServiceResult Delete(Guid Id);
         /// <summary>
         /// Hàm chỉnh sửa một đối tượng
         /// </summary>
         /// <param name="entity">Một đối tượng cần chỉnh sửa</param>
         /// <param name="entityId">ID của đối tượng chỉnh sửa</param>
-        /// <returns>Số bản ghi bị chỉnh sửa</returns>
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả + số bản ghi chỉnh sửa </returns>
         /// /// CreateBy:NHDUONG 29/5
-        public int Update(MISAEntity entity, Guid entityId);
+        public ServiceResult Update(MISAEntity entity, Guid entityId);
         /// <summary>
         /// Hàm thêm một đối tượng
         /// </summary>
         /// <param name="entity">Đối tượng cần thêm vào</param>
-        /// <returns>số bản ghi được thêm</returns>
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả + số bản ghi thêm mới</returns>
         /// /// CreateBy:NHDUONG 29/5
-        public int Insert(MISAEntity entity);
+        public ServiceResult Insert(MISAEntity entity);
+        /// <summary>
+        /// Hàm lấy tất cả các mã code trong cơ sở dữ liệu
+        /// </summary>
+        /// <returns>Một đối tượng ServiceResult thông báo kết quả + danh sách các code trong bảng </returns>
+        public ServiceResult GetAllCode();
     }
 }

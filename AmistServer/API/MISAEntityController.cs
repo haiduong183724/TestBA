@@ -25,7 +25,7 @@ namespace AmistServer.API
             _baseRepo = baseRepo;
         }
         #endregion
-        #region api
+        #region 
         [HttpGet]
         public IActionResult Get()
         {
@@ -42,15 +42,23 @@ namespace AmistServer.API
         public IActionResult Post(MISAEntity entity)
         {
             var res = _baseService.Insert(entity);
+            if(res.isValid == false)
+            {
+                return BadRequest(res);
+            }
             return Ok(res);
         }
         [HttpPut]
         public IActionResult Put(MISAEntity entity, Guid entityId)
         {
             var res = _baseService.Update(entity, entityId);
+            if (res.isValid == false)
+            {
+                return BadRequest(res);
+            }
             return Ok(res);
         }
-        [HttpDelete]
+        [HttpDelete("{entityId}")]
         public IActionResult Delete(Guid entityId)
         {
             var res = _baseRepo.Delete(entityId);

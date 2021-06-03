@@ -11,19 +11,32 @@ namespace AmistServer.API
 {
     public class EmployeeController: MISAEntityController<Employee>
     {
-        ICustomerFilterData _customerService;
-        ICustomerExcute _customerExcute;
-        public EmployeeController(ICustomerFilterData customerService,
-             ICustomerExcute customerExcute):base(customerService, customerExcute)
+        IEmployeeService _employeeService;
+        IEmployeeRepo _employeeRepo;
+        public EmployeeController(IEmployeeService employeeService,
+             IEmployeeRepo employeeExcute):base(employeeService, employeeExcute)
         {
-            _customerService = customerService;
-            _customerExcute = customerExcute;
+            _employeeService = employeeService;
+            _employeeRepo = employeeExcute;
         }
         [HttpGet("Pagging")]
         public IActionResult Get(int index)
         {
-            var employees = _customerExcute.GetPageTen(index);
-            return Ok(employees);
+            var result = _employeeRepo.GetPageTen(index);
+            if(result.isValid == false) {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpGet("NewCode")]
+        public IActionResult Get()
+        {
+            var result = _employeeRepo.GetNewEmployeeCode();
+            if(result.isValid == false)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }

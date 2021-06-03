@@ -35,10 +35,11 @@ namespace AmistServer
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AmistServer", Version = "v1" });
             });
-            services.AddScoped<ICustomerFilterData, CustomerFilterService>();
-            services.AddScoped<ICustomerExcute, EmployeeRepo>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddScoped(typeof(IBaseRepo<>),typeof(MISABaseRepo<>));
             services.AddScoped(typeof(IBaseService<>), typeof(MISABaseService<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +55,14 @@ namespace AmistServer
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:8080")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+            }); 
 
             app.UseAuthorization();
 

@@ -6,6 +6,8 @@ using Dapper;
 using MySqlConnector;
 using System.Data;
 using System.Linq;
+using CustomerCors.ErrorMsg;
+
 namespace InterStructor.Service
 {
     public class MISABaseRepo<MISAEntity> : IBaseRepo<MISAEntity>
@@ -20,6 +22,12 @@ namespace InterStructor.Service
         #region ConnectDataBase
         protected IDbConnection Connect()
         {
+            //string connectionString = "" +
+            //    "Host = 47.241.69.179;" +
+            //    "Port = 3306;" +
+            //    "Database = MF_FS_CukCuk;" +
+            //    "User Id = nvmanh;" +
+            //    "Password = 12345678;";
             string connectionString = "" +
                 "Host = localhost;" +
                 "Port = 3306;" +
@@ -29,25 +37,46 @@ namespace InterStructor.Service
             return new MySqlConnection(connectionString);
         }
         #endregion
-        
-
-        public List<MISAEntity> GetAll()
+        public ServiceResult GetAll()
         {
+            var result = new ServiceResult();
             var sqlCommand = $"SELECT * FROM {tableName}";
-            var entities = this.Connect().Query<MISAEntity>(sqlCommand).ToList();
-            return entities; 
+            try 
+            {
+                var entities = this.Connect().Query<MISAEntity>(sqlCommand).ToList();
+                result.Data.Add(entities);
+                result.ErrorMsg.Add("Lấy dữ liệu thành công!");
+            }
+            catch(Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
         }
 
-        public MISAEntity GetbyId(Guid entityId)
+        public ServiceResult GetbyId(Guid entityId)
         {
             var sqlCommand = $"select * from {tableName} WHERE {tableName}ID = @entityId";
             DynamicParameters param = new DynamicParameters();
             param.Add("@entityId", entityId);
-            var entity = this.Connect().QueryFirstOrDefault<MISAEntity>(sqlCommand, param: param);
-            return entity;
+            
+            var result = new ServiceResult();
+            try
+            {
+                var entity = this.Connect().QueryFirstOrDefault<MISAEntity>(sqlCommand, param: param);
+                result.Data.Add(entity);
+                result.ErrorMsg.Add("Lấy dữ liệu thành công!");
+            }
+            catch (Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
         }
 
-        public int Insert(MISAEntity entity)
+        public ServiceResult Insert(MISAEntity entity)
         {
             var sqlCommandField = "";
             var sqlCommandValue = "";
@@ -82,12 +111,22 @@ namespace InterStructor.Service
                 }
                 _param.Add($"@{propName}", propValue);
             }
-            var res = this.Connect().Execute(sqlCommand, param: _param);
-
-            return res;
+            var result = new ServiceResult();
+            try
+            {
+                var res = this.Connect().Execute(sqlCommand, param: _param);
+                result.Data.Add(res);
+                result.ErrorMsg.Add("Thêm dữ liệu thành công!");
+            }
+            catch (Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
         }
 
-        public int Update(MISAEntity entity, Guid entityId)
+        public ServiceResult Update(MISAEntity entity, Guid entityId)
         {
             var sqlCommandValue = "";
             var properties = entity.GetType().GetProperties();
@@ -116,6 +155,7 @@ namespace InterStructor.Service
                     i++;
                 }
             }
+            // Khởi tạo câu lệnh truy vấn
             var sqlCommand = $"UPDATE {tableName} SET {sqlCommandValue} WHERE {condition}";
             foreach (var pro in properties)
             {
@@ -123,16 +163,56 @@ namespace InterStructor.Service
                 var propValue = pro.GetValue(entity);
                 param.Add($"@{propName}", propValue);
             }
-            var res = this.Connect().Execute(sqlCommand, param: param);
-            return res;
+            var result = new ServiceResult();
+            // Request tới server
+            try
+            {
+                var res = this.Connect().Execute(sqlCommand, param: param);
+                result.Data.Add(res);
+                result.ErrorMsg.Add("Chỉnh sửa thành công!");
+            }
+            catch (Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
         }
-        public int? Delete(Guid entityId)
+        public ServiceResult Delete(Guid entityId)
         {
             var sqlCommand = $"delete from {tableName} WHERE {tableName}ID = @entityId";
             DynamicParameters param = new DynamicParameters();
             param.Add("@entityId", entityId);
-            var res = this.Connect().Execute(sqlCommand, param: param);
-            return res;
+            var result = new ServiceResult();
+            try
+            {
+                var res = this.Connect().Execute(sqlCommand, param: param);
+                result.Data.Add(res);
+                result.ErrorMsg.Add("Xóa dữ liệu thành công!");
+            }
+            catch (Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
+        }
+
+        public ServiceResult GetAllCode()
+        {
+            var sqlCommand = $"SELECT {tableName}Code from {tableName}";
+            var result = new ServiceResult();
+            try 
+            {
+                var res = this.Connect().Query<string>(sqlCommand).ToList();
+                result.Data.Add(res);
+            }
+            catch(Exception e)
+            {
+                result.isValid = false;
+                result.ErrorMsg.Add(e.Message);
+            }
+            return result;
         }
     }
 }
