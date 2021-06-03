@@ -109,16 +109,16 @@ namespace CustomerCors.Service
                 // Kiểm tra thời gian trong phạm vi 1/1/2001 => 1/1/2025
                 if (propValue != null && propValue.GetType() == typeof(DateTime))
                 {
+                    // chuyển từ kiểu datetime sang int : Năm*512 + tháng *64 + ngày
+                    var minDate = 2000 * 512 + 1 * 64 + 1;
+                    var maxDate = 2025 * 512 + 1 * 64 + 1;
+                    // Lấy giá trị datetime nhận được
                     DateTime date = (DateTime)propValue;
-                    if(date.Year < 2001 || date.Year > 2025)
+                    var DateValue = date.Year * 512 + date.Month * 64 + date.Day;
+                    if(DateValue>maxDate || DateValue< minDate)
                     {
                         result.isValid = false;
-                        result.ErrorMsg.Add($"{propName} phải trong phạm vi từ 1-1-2001 đến 1-1-2021");
-                    }
-                    if(date.Year == 2025 && (date.Day>1 || date.Month>1))
-                    {
-                        result.isValid = false;
-                        result.ErrorMsg.Add($"{propName} phải trong phạm vi từ 1-1-2001 đến 1-1-2021");
+                        result.ErrorMsg.Add("Ngày nhập phải trong khoảng 1/1/2000 đến 1/1/2025");
                     }
                 }
                 // Kiểm tra các trường bắt buộc nhập
