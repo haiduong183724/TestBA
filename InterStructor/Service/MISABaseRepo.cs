@@ -22,18 +22,13 @@ namespace InterStructor.Service
         #region ConnectDataBase
         protected IDbConnection Connect()
         {
-            //string connectionString = "" +
-            //    "Host = 47.241.69.179;" +
-            //    "Port = 3306;" +
-            //    "Database = MF_FS_CukCuk;" +
-            //    "User Id = nvmanh;" +
-            //    "Password = 12345678;";
-            string connectionString = "" +
-                "Host = localhost;" +
-                "Port = 3306;" +
-                "Database = amist-test-hd;" +
-                "User Id = root;" +
-                "Password = 0matkhau;";
+            var connectionString = "" +
+                "host = 47.241.69.179;" +
+                "port = 3306;" +
+                "database = MF848_AMIST_NHDUONG;" +
+                "user id = nvmanh;" +
+                "password = 12345678;";
+
             return new MySqlConnection(connectionString);
         }
         #endregion
